@@ -1,11 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import css from "./Navigation.module.css";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectAuth } from "../../redux/auth/selectors";
+import { logOut } from "../../redux/auth/operations";
 
 const Navigation = () => {
   const { isLoggedIn, user } = useSelector(selectAuth);
+  const dispatch = useDispatch();
   const dinamicStyle = ({ isActive }) => {
     return clsx(css.link, isActive && css.active);
   };
@@ -49,7 +51,12 @@ const Navigation = () => {
         )}
         {isLoggedIn && (
           <li>
-            <button className={css.btnLogout}>Logout</button>
+            <button
+              onClick={() => dispatch(logOut())}
+              className={css.btnLogout}
+            >
+              Logout
+            </button>
           </li>
         )}
       </ul>

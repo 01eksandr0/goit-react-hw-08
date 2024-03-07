@@ -5,10 +5,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 const FeedbackSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
   email: Yup.string().email().required("Required"),
   password: Yup.string()
     .min(8, "Too Short!")
@@ -20,7 +16,6 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    console.log(1);
     dispatch(logIn(values));
   };
   return (
